@@ -8,10 +8,10 @@ const CONTACTS = {
   phone: '+7 (814) 123-45-67',
   telegram: 'sadki_karelii',          // ник без @
   email: 'info@sadki-karelii.ru',     // на этот же адрес приходят заявки
-  address: 'Республика Карелия, г.\u00a0Петрозаводск',
+  address: 'Республика Карелия, с.\u00a0Янишполе, ул.\u00a0Скалистая,\u00a01/1',
   // точка на карте (широта, долгота) — для кнопок «Открыть на карте» и «Построить маршрут»
-  lat: 61.7849,
-  lon: 34.3469,
+  lat: 62.122157,
+  lon: 34.271501,
   hours: 'Пн–Пт, 9:00–18:00',
 };
 
@@ -46,7 +46,7 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   $$('[data-contact="email"]').forEach(a => { a.href = 'mailto:' + CONTACTS.email; if (!a.children.length) a.textContent = CONTACTS.email; });
   $$('[data-contact="address"]').forEach(el => { el.textContent = CONTACTS.address; });
   const map = $('#map');
-  if (map) map.src = `https://yandex.ru/map-widget/v1/?ll=${CONTACTS.lon}%2C${CONTACTS.lat}&z=11&pt=${CONTACTS.lon}%2C${CONTACTS.lat}%2Cpm2orl`;
+  if (map) map.src = `https://yandex.ru/map-widget/v1/?ll=${CONTACTS.lon}%2C${CONTACTS.lat}&z=15&pt=${CONTACTS.lon}%2C${CONTACTS.lat}%2Cpm2orl`;
   const routeWeb = `https://yandex.ru/maps/?rtext=~${CONTACTS.lat},${CONTACTS.lon}&rtt=auto`;
   const routeApp = `yandexmaps://maps.yandex.ru/?rtext=~${CONTACTS.lat},${CONTACTS.lon}&rtt=auto`;
   $$('[data-map="route"]').forEach(a => {
@@ -146,24 +146,63 @@ function buildCage() {
   s += `<rect x="0" y="302" width="600" height="238" fill="rgba(46,127,134,.16)"/>`;
   s += `<path d="M0 302 ${Array.from({ length: 12 }, (_, i) => `Q ${25 + i * 50} 297 ${50 + i * 50} 302`).join(' ')}" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>`;
 
-  // 06 якорная система
+  // Якорная система (временно скрыта)
+  /*
   s += `<g class="layer" data-layer="anchor">`;
   [[70, 300, 22, 516], [530, 300, 578, 516], [175, 268, 128, 528], [425, 268, 472, 528]].forEach(([x1, y1, x2, y2], i) => {
     s += `<path d="M${x1} ${y1} L${x2} ${y2}" class="hl" stroke="${i > 1 ? D : W}" stroke-width="2" stroke-dasharray="${i > 1 ? '4 5' : '0'}" fill="none"/>`;
     s += `<rect x="${x2 - 14}" y="${y2 - 6}" width="28" height="14" rx="2" class="hlf" fill="${i > 1 ? D : W}"/>`;
   });
   s += `</g>`;
+  */
 
   // 04 делевой мешок
   s += `<g class="layer" data-layer="net" fill="none">`;
-  s += ell(322, 212, 40, 'hl', `stroke="${W}" stroke-width="2" stroke-dasharray="5 4"`);
-  s += ell(388, 182, 34, 'hl', `stroke="${D}" stroke-width="1.5" stroke-dasharray="3 4"`);
-  s += ell(452, 150, 28, 'hl', `stroke="${W}" stroke-width="2"`);
+  s += ell(320, 212, 39, 'hl', `stroke="${W}" stroke-width="2" stroke-dasharray="5 4"`);
+  s += ell(368, 180, 32, 'hl', `stroke="${D}" stroke-width="1.5" stroke-dasharray="3 4"`);
+  // нижнее огрузочное кольцо садка
+  s += ell(418, 148, 26, 'hl', `stroke="${W}" stroke-width="3.5"`);
   for (let k = 0; k <= 10; k++) {
     const a = Math.PI * k / 10;            // передняя половина
-    const [x1, y1] = pt(322, 212, 40, a), [x2, y2] = pt(452, 150, 28, a);
+    const [x1, y1] = pt(320, 212, 39, a), [x2, y2] = pt(418, 148, 26, a);
     s += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" class="hl" stroke="${k === 0 || k === 10 ? W : D}" stroke-width="${k === 0 || k === 10 ? 2 : 1.2}"/>`;
   }
+  s += `</g>`;
+
+  // 05 мешок для отхода (конус продолжается вниз от нижнего кольца садка)
+  s += `<g class="layer" data-layer="waste" fill="none">`;
+  // сопряжение с нижним кольцом садка
+  s += ell(418, 148, 26, 'hl', `stroke="${D}" stroke-width="1.5" stroke-dasharray="4 4"`);
+  // промежуточное сечение конуса
+  s += ell(454, 94, 16, 'hl', `stroke="${D}" stroke-width="1.2" stroke-dasharray="3 3"`);
+  // горловина сборника отхода
+  s += ell(486, 40, 7, 'hl', `stroke="${W}" stroke-width="2"`);
+
+  // задние линии конуса
+  for (let k = 1; k < 8; k++) {
+    const a = Math.PI + Math.PI * k / 8;
+    const [x1, y1] = pt(418, 148, 26, a), [x2, y2] = pt(486, 40, 7, a);
+    s += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" class="hl" stroke="${D}" stroke-width="1" stroke-dasharray="3 3"/>`;
+  }
+  // передние образующие конуса к сборнику
+  for (let k = 0; k <= 8; k++) {
+    const a = Math.PI * k / 8;
+    const [x1, y1] = pt(418, 148, 26, a), [x2, y2] = pt(486, 40, 7, a);
+    s += `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" class="hl" stroke="${k === 0 || k === 8 ? W : D}" stroke-width="${k === 0 || k === 8 ? 2 : 1.2}"/>`;
+  }
+
+  // сам мешок / стакан для сбора отхода
+  s += `<path d="M${cx - 40} 486 L${cx - 36} 516 A 36 6 0 0 1 ${cx + 36} 516 L${cx + 40} 486 A 40 7 0 0 0 ${cx - 40} 486 Z" class="hlf" fill="rgba(233,238,241,.14)" stroke="none"/>`;
+  s += `<path d="M${cx - 40} 486 L${cx - 36} 516 M${cx + 40} 486 L${cx + 36} 516" class="hl" stroke="${W}" stroke-width="2"/>`;
+  s += ell(516, 36, 6, 'hl', `stroke="${W}" stroke-width="2"`);
+  [-18, 0, 18].forEach(dx => {
+    s += `<path d="M${cx + dx} 492 v24" class="hl" stroke="${D}" stroke-width="1.2"/>`;
+  });
+  // строп и концевое кольцо-груз
+  s += `<path d="M${cx} 522 v6" class="hl" stroke="${W}" stroke-width="2"/>`;
+  s += `<circle cx="${cx}" cy="531" r="3.5" class="hl" stroke="${W}" stroke-width="2" fill="none"/>`;
+  // строп / линия подъема отхода на поручень садка
+  s += `<path d="M${cx} 242 L${cx} 486" class="hl" stroke="${D}" stroke-width="1.2" stroke-dasharray="3 4"/>`;
   s += `</g>`;
 
   // 01 плавучее кольцо (трубы)
