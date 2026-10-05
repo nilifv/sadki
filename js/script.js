@@ -366,7 +366,7 @@ $('#lbStage').addEventListener('touchend', e => {
 
 // число фото на кнопках — считаем в фоне, когда страница загрузилась
 window.addEventListener('load', () => setTimeout(async () => {
-  for (const key of ['round', 'square', 'pontoon']) {
+  for (const key of ['round', 'square']) {
     const n = (await loadGallery(key)).length;
     $$(`[data-count="${key}"]`).forEach(b => { b.textContent = n > 1 ? n : ''; });
   }
@@ -374,7 +374,12 @@ window.addEventListener('load', () => setTimeout(async () => {
 
 /* ---------- Форма ---------- */
 const form = $('#requestForm');
-const PICK_MAP = { 'Круглый': 'Круглый садок', 'Квадратный': 'Квадратный садок', 'Понтонный': 'Понтонный садок', 'Рабочий понтон': 'Комплектующие' };
+const PICK_MAP = { 
+  'Круглый': 'Круглый садок', 
+  'Квадратный': 'Квадратный садок', 
+  'Рабочий понтон': 'Рабочий понтон',
+  'Сачки': 'Сачки'
+};
 function pick(value) {
   const v = PICK_MAP[value];
   if (!v) return;
