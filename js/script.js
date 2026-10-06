@@ -397,7 +397,7 @@ const form = $('#requestForm');
 const PICK_MAP = { 
   'Круглый': 'Круглый садок', 
   'Квадратный': 'Квадратный садок', 
-  'Рабочий понтон': 'Рабочий понтон',
+  'Понтон с манипулятором': 'Понтон с манипулятором',
   'Сачки': 'Сачки'
 };
 function pick(value) {
@@ -405,8 +405,8 @@ function pick(value) {
   if (!v) return;
   const r = form.querySelector(`input[name="type"][value="${v}"]`);
   if (r) r.checked = true;
-  if (value === 'Рабочий понтон') {
-    const c = form.querySelector('input[name="opts"][value="Рабочий понтон"]');
+  if (value === 'Понтон с манипулятором') {
+    const c = form.querySelector('input[name="opts"][value="Понтон с манипулятором"]');
     if (c) { c.checked = true; $('#params').open = true; }
   }
 }

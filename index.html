@@ -259,17 +259,17 @@
       <!-- Понтон -->
       <article class="equip-card">
         <div class="equip-card__img">
-          <img src="img/birds.jpg" alt="Рабочий понтон с манипулятором" loading="lazy">
+          <img src="img/birds.jpg" alt="Понтон с манипулятором" loading="lazy">
         </div>
         <div class="equip-card__body">
-          <h3 class="equip-card__title">Рабочий понтон с&nbsp;манипулятором</h3>
+          <h3 class="equip-card__title">Понтон с&nbsp;манипулятором</h3>
           <p class="equip-card__desc">Применяется для доставки кормов и&nbsp;отгрузки рыбы непосредственно на&nbsp;садковой линии.</p>
           <dl class="equip-card__specs">
             <div><dt>Грузоподъёмность</dt><dd>до 10 т</dd></div>
             <div><dt>Оснащение</dt><dd>манипулятор</dd></div>
           </dl>
           <div class="equip-card__footer">
-            <a href="#request" class="btn btn--dark btn--block" data-pick="Рабочий понтон">Запросить стоимость</a>
+            <a href="#request" class="btn btn--dark btn--block" data-pick="Понтон с манипулятором">Запросить стоимость</a>
           </div>
         </div>
       </article>
@@ -299,15 +299,10 @@
 <!-- ================= TURNKEY ================= -->
 <section class="sec sec--dark" id="turnkey">
   <div class="wrap">
-    <div class="sec__head sec__head--row">
-      <div>
-        <p class="kicker kicker--light">Под ключ</p>
-        <h2 class="sec__title">Полный цикл: от&nbsp;расчёта до&nbsp;сдачи объекта</h2>
-      </div>
-      <div class="guarantee">
-        <b>1 год</b>
-        <span>гарантии на&nbsp;садки при поставке под ключ — независимо от&nbsp;условий установки</span>
-      </div>
+    <div class="sec__head">
+      <p class="kicker kicker--light">Под ключ</p>
+      <h2 class="sec__title">Полный цикл: от&nbsp;расчёта до&nbsp;сдачи объекта</h2>
+      <p class="sec__lead">Берём на&nbsp;себя весь цикл: от&nbsp;проектирования под условия водоёма до&nbsp;сварки, доставки и&nbsp;постановки садковой линии на&nbsp;воду.</p>
     </div>
 
     <div class="cycle">
@@ -334,37 +329,41 @@
       <div class="cycle__grid">
         <!-- 01 Расчёт -->
         <article class="bp-card" data-step="1">
-          <div class="bp-card__head">
+          <div class="bp-card__top">
             <span class="bp-card__num">01</span>
-            <h3 class="bp-card__title">Расчёт</h3>
+            <span class="bp-card__stage">Проектирование</span>
           </div>
+          <h3 class="bp-card__title">Расчёт</h3>
           <p class="bp-card__desc">Анализируем условия водоёма и&nbsp;объёмы выращивания, рассчитываем ветро-волновые нагрузки, готовим проект и&nbsp;коммерческое предложение.</p>
         </article>
 
         <!-- 02 Производство -->
         <article class="bp-card" data-step="2">
-          <div class="bp-card__head">
+          <div class="bp-card__top">
             <span class="bp-card__num">02</span>
-            <h3 class="bp-card__title">Производство</h3>
+            <span class="bp-card__stage">Свой цех</span>
           </div>
+          <h3 class="bp-card__title">Производство</h3>
           <p class="bp-card__desc">Стыковая сварка несущих ПНД-труб на&nbsp;собственном оборудовании, пошив усиленных делевых мешков и&nbsp;изготовление оснастки.</p>
         </article>
 
         <!-- 03 Доставка -->
         <article class="bp-card" data-step="3">
-          <div class="bp-card__head">
+          <div class="bp-card__top">
             <span class="bp-card__num">03</span>
-            <h3 class="bp-card__title">Доставка</h3>
+            <span class="bp-card__stage">Логистика</span>
           </div>
+          <h3 class="bp-card__title">Доставка</h3>
           <p class="bp-card__desc">Доставляем комплект оборудования собственным и&nbsp;наёмным спецтранспортом в&nbsp;любой регион России точно в&nbsp;срок.</p>
         </article>
 
         <!-- 04 Монтаж -->
         <article class="bp-card" data-step="4">
-          <div class="bp-card__head">
+          <div class="bp-card__top">
             <span class="bp-card__num">04</span>
-            <h3 class="bp-card__title">Монтаж</h3>
+            <span class="bp-card__stage">Под ключ</span>
           </div>
+          <h3 class="bp-card__title">Монтаж</h3>
           <div class="turnkey-variants">
             <div class="turnkey-var">
               <span class="turnkey-var__num">Вариант 1 (Технический)</span>
@@ -407,7 +406,7 @@
         </div>
         <div>
           <b>Видеозапись испытаний</b>
-          <span>Скоро: съёмка с акватории Онежского озера</span>
+          <span>публикация в ближайшее время</span>
         </div>
       </div>
     </div>
@@ -449,9 +448,9 @@
         <div class="choice">
           <label class="choice__tile"><input type="radio" name="type" value="Круглый садок"><span class="choice__box"><svg class="choice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5" stroke-dasharray="2 2"/></svg><span class="choice__label">Круглый садок</span></span></label>
           <label class="choice__tile"><input type="radio" name="type" value="Квадратный садок"><span class="choice__box"><svg class="choice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1" stroke-dasharray="2 2"/></svg><span class="choice__label">Квадратный садок</span></span></label>
-          <label class="choice__tile"><input type="radio" name="type" value="Рабочий понтон"><span class="choice__box"><svg class="choice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="9" rx="2"/><path d="M7 8V5h3v3M14 8V5h3v3"/></svg><span class="choice__label">Рабочий понтон</span></span></label>
+          <label class="choice__tile"><input type="radio" name="type" value="Понтон с манипулятором"><span class="choice__box"><svg class="choice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="9" rx="2"/><path d="M7 8V5h3v3M14 8V5h3v3"/></svg><span class="choice__label">Понтон с&nbsp;манипулятором</span></span></label>
           <label class="choice__tile"><input type="radio" name="type" value="Сачки"><span class="choice__box"><svg class="choice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><path d="M12 12l9 9" stroke-width="2.5" stroke-linecap="round"/></svg><span class="choice__label">Сачки и&nbsp;инвентарь</span></span></label>
-          <label class="choice__tile choice--wide"><input type="radio" name="type" value="Нужна консультация" checked><span class="choice__box"><svg class="choice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" stroke-linecap="round"/></svg><span class="choice__label">Нужна консультация специалиста</span></span></label>
+          <label class="choice__tile choice--wide"><input type="radio" name="type" value="Нужна консультация" checked><span class="choice__box"><svg class="choice__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" stroke-linecap="round"/></svg><span class="choice__label">Нужна консультация</span></span></label>
         </div>
       </fieldset>
 
@@ -491,7 +490,7 @@
             <label class="check"><input type="checkbox" name="opts" value="Защита от птиц"><span>Защита от птиц</span></label>
             <label class="check"><input type="checkbox" name="opts" value="Поддержка"><span>Поддержка</span></label>
             <label class="check"><input type="checkbox" name="opts" value="Мешки для снятия отхода"><span>Мешки для снятия отхода</span></label>
-            <label class="check"><input type="checkbox" name="opts" value="Рабочий понтон"><span>Рабочий понтон</span></label>
+            <label class="check"><input type="checkbox" name="opts" value="Понтон с манипулятором"><span>Понтон с манипулятором</span></label>
           </div>
           <label class="input params__wide"><span>Регион, водоём, дополнительная информация</span><textarea name="comment" rows="3"></textarea></label>
         </div>
@@ -515,10 +514,7 @@
 
       <!-- Стеклянная карточка контактов поверх карты -->
       <div class="contacts-card">
-        <div class="status-chip">
-          <span class="status-chip__dot"></span>
-          <span>Открыто • Пн–Пт 9:00–18:00</span>
-        </div>
+        <p class="kicker kicker--light">Контакты</p>
         <h2 class="contacts-card__title">Садки Карелии</h2>
         <p class="contacts-card__subtitle">Производственная площадка и главный офис</p>
 
