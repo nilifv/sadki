@@ -102,12 +102,32 @@ const navObs = new IntersectionObserver(es => es.forEach(e => {
 navLinks.forEach(a => { const s = $(a.getAttribute('href')); if (s) navObs.observe(s); });
 
 /* ---------- Появление при прокрутке ---------- */
-const revealEls = $$('.sec__head, .cage__info, .split__body, .guarantee, .timeline li, .about__photo, .about__body, .request__side, .form, .contacts__info');
+const revealEls = $$('.sec__head, .stat-card, .cage__info, .equip-card, .guarantee, .bp-card, .about__photo, .about__body, .request__side, .form, .contacts-card');
 revealEls.forEach(el => el.classList.add('reveal'));
 const revObs = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('is-in'); revObs.unobserve(e.target); }
 }), { threshold: 0.1 });
 revealEls.forEach(el => revObs.observe(el));
+
+/* ---------- Интерактив этапов полного цикла (Tracing Beam) ---------- */
+const stations = $$('.cycle__station');
+const bpCards = $$('.bp-card');
+function setStepActive(step) {
+  stations.forEach(st => st.classList.toggle('is-active', st.dataset.step === step));
+  bpCards.forEach(cd => cd.classList.toggle('is-active', cd.dataset.step === step));
+}
+bpCards.forEach(cd => {
+  cd.addEventListener('mouseenter', () => setStepActive(cd.dataset.step));
+  cd.addEventListener('mouseleave', () => setStepActive(null));
+});
+stations.forEach(st => {
+  st.addEventListener('mouseenter', () => setStepActive(st.dataset.step));
+  st.addEventListener('mouseleave', () => setStepActive(null));
+  st.addEventListener('click', () => {
+    const target = $(`.bp-card[data-step="${st.dataset.step}"]`);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+});
 
 const video = $('.hero__video');
 if (video && matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause();
