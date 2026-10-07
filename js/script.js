@@ -23,9 +23,11 @@ const CONTACTS = {
 */
 const PROJECTS = [];
 
-/* Заявки на почту через FormSubmit (без своего сервера).
-   При первой заявке на адрес придёт письмо — его нужно один раз подтвердить. */
-const FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACTS.email;
+/* Приём заявок:
+   - На боевом хостинге с PHP: собственный надёжный скрипт 'send.php' (Email + Telegram + Honeypot).
+   - В статическом окружении (GitHub Pages): автоматический резерв на FormSubmit. */
+const FORM_ENDPOINT = 'send.php';
+const FALLBACK_ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACTS.email;
 
 /* Галерея: фото лежат в img/gallery/round | square | pontoon и называются 1.jpg, 2.jpg, …
    Галерея сама находит все фото подряд, пока не встретит пропуск в нумерации. */
@@ -462,12 +464,22 @@ form.addEventListener('submit', async e => {
 
   submitBtn.disabled = true; submitBtn.textContent = 'Отправляем…';
   try {
-    const res = await fetch(FORM_ENDPOINT, {
+    // 1. Сначала пробуем собственный серверный скрипт send.php (для боевого хостинга с PHP)
+    let res = await fetch(FORM_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error(res.status);
+      body: fd,
+    }).catch(() => null);
+
+    // 2. Если send.php недоступен (например, при тестировании на GitHub Pages без PHP) — резерв через FormSubmit
+    if (!res || !res.ok) {
+      res = await fetch(FALLBACK_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => null);
+    }
+
+    if (!res || !res.ok) throw new Error(res ? res.status : 'Network error');
     status.classList.add('ok');
     status.textContent = 'Спасибо! Заявка принята. Специалист свяжется с вами в ближайшее рабочее время.';
     form.reset();
